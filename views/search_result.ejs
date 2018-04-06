@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>Search Results</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='/stylesheets/style.css' rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  </head>
+
+  <body>
+
+    <!--The Navigation Bar-->
+    <% include partials/navbar.ejs%>
+
+    <br/>
+
+    <a href="/">
+        <button type="button" class="btn btn-primary" href="/index">Go Back</button>
+    </a>
+
+    <br/>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <!--TODO - generate those using code-->
+
+                <form>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Option 1</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Option 2</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" >Option 3</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" >Option 4</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" >Option 5</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" >Option 6</label>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <h3>Your search result here...</h3>
+                <p>Results....</p>
+            </div>
+        </div>
+    </div>
+
+    <!--THE SCRIPTS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+
+  </body>
+</html>

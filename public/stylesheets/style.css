@@ -1,8 +1,58 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
+button a {
+  color: #ffffff;
+}
+
+/*********** BOOTSTRAP STYLES ***********/
+
+.navbar-custom {
+  position: absolute;
+  background-color: #00A4A7;
+  height: auto;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: rgba(255,255,255,.9);
+}
+
+.navbar-custom .navbar-nav .nav-link {
+  color: rgba(255,255,255, .7);
+}
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #ffffff;
+}
+
+/**/
+#search_bar{
+  padding: 3px;
+  border: solid 1px #E4E4E4;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+#search_bar input{
+  border: 0;
+  box-shadow: none;
+}
+
+#search_bar button{
+  margin: 5px 0 5px 0;
+  padding: 0 3px 0 20px;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  color: #666666;
+  border-left: solid 1px #ccc;
+}
+
+

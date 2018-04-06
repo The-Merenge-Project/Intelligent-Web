@@ -2,10 +2,52 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='/stylesheets/style.css' rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   </head>
+
   <body>
+   <!--The Navigation Bar-->
+  <% include partials/navbar.ejs%>
+
+   <br/>
+
+    <!--The Page Content-->
+   <div class="container">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+     <br/>
+
+     <!--The Search Bar definition-->
+     <div id="search_bar">
+       <div class="input-group col-md-12">
+         <input type="text" class="form-control input-lg" placeholder="Search..." />
+         <span class="input-group-btn">
+           <a href="/search_result">
+             <button class="btn btn-info btn-lg" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+           </a>
+         </span>
+       </div>
+   </div>
+
+     <br/>
+     <hr>
+
+     <!--
+        The Google Map div used for displaying
+        the function that is displaying it is located in maps.js
+     -->
+     <div id="map" style="width:100%;height:400px;"></div>
+
+       <!--THE SCRIPTS-->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="/scripts/bootstrap.min.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&callback=initMap"></script>
+     <script src="/scripts/maps.js"></script>
   </body>
 </html>
