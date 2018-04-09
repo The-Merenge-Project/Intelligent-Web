@@ -10,10 +10,14 @@ router.get('/', function(req, res, next) {
 
 router.get('/search_result', function (req, res, next) {
     res.render('search_result')
-})
+});
 
 router.get('/test', function (req, res, next) {
     res.render('test')
-})
+});
+
+router.post('/search_result', function (req, res, next) {
+    res.render('search_result', {searched_restaurant: req.body.search_query})
+});
 
 module.exports = router;

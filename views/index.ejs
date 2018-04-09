@@ -24,16 +24,18 @@
      <br/>
 
      <!--The Search Bar definition-->
-     <div id="search_bar">
-       <div class="input-group col-md-12">
-         <input type="text" class="form-control input-lg" placeholder="Search..." />
-         <span class="input-group-btn">
-           <a href="/search_result">
-             <button class="btn btn-info btn-lg" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-           </a>
-         </span>
-       </div>
-   </div>
+     <form action = "search_result" method = "POST">
+         <div id="search_bar">
+           <div class="input-group col-md-12">
+             <input type="text" id = "search-query" name = "search_query" class="form-control input-lg" placeholder="Search..." required />
+             <span class="input-group-btn">
+               <button class="btn btn-info btn-lg" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+             </span>
+           </div>
+         </div>
+     </form>
+
+
 
      <br/>
      <hr>
