@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var Address = require('../models/addresses');
-var Restaurant = require('../models/restaurants')
+var Restaurant = require('../models/restaurants');
 
 
 exports.init= function() {
+    console.log(Restaurant.schema.path('cuisine').caster.enumValues);
     // uncomment if you need to drop the database
     //
     // Character.remove({}, function(err) {
@@ -18,20 +19,20 @@ exports.init= function() {
          postcode: 'S128IK',
          building: 12,
          coordinates: [3.12, 3.12]
-     });
+    });
 
     var restaurant = new Restaurant({
-        name: 'Bar Valentin',
+        name: 'Secret by Chev Petrof',
         address: address,
-        cusine: 'Eastern European'
+        cuisine: 'Eastern European'
     });
-     //console.log('dob: '+character.dob);
+    // console.log('dob: '+character.dob);
 
-    address.save(function (err, results) {
-         console.log(results._id);
-     });
+    // address.save(function (err, results) {
+    //     console.log(results._id);
+    // });
 
-    restaurant.save(function (err, results) {
-        console.log(results._id);
-    });
-}
+    //restaurant.save(function (err, results) {
+    //    console.log(results._id);
+    // });
+};

@@ -1,6 +1,4 @@
 var express = require('express');
-var mongoose = require('mongoose');
-var models = require('../models/restaurants');
 var router = express.Router();
 
 //The AJAX module
@@ -28,6 +26,8 @@ router.post('/search_result', function (req, res,next) {
 
     //Stringify the data before sending back
     res.send(JSON.stringify(userData));
+    res.render('search_result', {searched_restaurant: req.body.search_query})
 })
+
 
 module.exports = router;
