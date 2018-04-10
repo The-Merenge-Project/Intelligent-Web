@@ -4,7 +4,8 @@ var router = express.Router();
 //The AJAX module
 var bodyParser = require("body-parser")
 
-var restaurant = require('../controllers/restaurants');
+var Restaurant = require('../models/restaurants');
+
 var initDB= require('../controllers/init');
 initDB.init();
 
@@ -15,19 +16,22 @@ router.get('/', function(req, res, next) {
 
 router.get('/search_result', function (req, res, next) {
 
-    res.render('search_result', { restaurantModel: "Access retaurant model here..."});
-})
+    res.render('search_result');
+});
 
 router.post('/search_result', function (req, res,next) {
 
+    var cuisines = Restaurant.schema.path('cuisine').caster.enumValues;
+
+    res.render('search_result', {searched_restaurant: req.body.search_query, cuisines: cuisines});
+});
+
+router.post('/checkboxes', function (req,res,next) {
     var userData = req.body; // We have javascript object here in the parser
 
     res.setHeader('Content-Type', 'application/json');
 
-    //Stringify the data before sending back
     res.send(JSON.stringify(userData));
-    res.render('search_result', {searched_restaurant: req.body.search_query})
 })
-
 
 module.exports = router;

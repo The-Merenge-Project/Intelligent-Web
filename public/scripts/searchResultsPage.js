@@ -35,6 +35,6 @@ function onChange(checkbox) {
     console.log(data)
 
     // const data = JSON.stringify($(this).serializeArray());
-    sendAjaxQuery('/search_result', data);
+    sendAjaxQuery('/checkboxes', data);
     event.preventDefault();
 }

@@ -25,15 +25,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <%= restaurantModel %>
 
                 <h3>Cuisine</h3>
                 <form id="cuisineOptions" >
-                    <% for(var i=0; i< 10; i++) { %>
-                    <div class="checkbox" >
-                        <label><input type="checkbox" name="Checkbox <%= i %>" value="<%= i %>" onchange="onChange(this)" >Option <%= i %></label>
-                    </div>
-                    <% } %>
+                    <% cuisines.forEach(function (cuisine) { %>
+                        <div class="checkbox" >
+                            <label><input type="checkbox" name="<%= cuisine %>" value="<%= cuisine %>" onchange="onChange(this)" ><%= cuisine %></label>
+                        </div>
+                   <% }) %>
+
+
 
                 </form>
                 <br/>

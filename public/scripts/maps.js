@@ -42,7 +42,6 @@ $(function () {
                 var marker = new google.maps.Marker({
                     position: pos,
                     map: map,
-                    icon: markerImage
                 });
 
                 locationMessage.setPosition(pos);
