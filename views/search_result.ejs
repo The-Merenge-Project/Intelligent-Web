@@ -25,40 +25,33 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
+                <%= restaurantModel %>
 
-                <!--TODO - generate those using code-->
+                <h3>Cuisine</h3>
+                <form id="cuisineOptions" >
+                    <% for(var i=0; i< 10; i++) { %>
+                    <div class="checkbox" >
+                        <label><input type="checkbox" name="Checkbox <%= i %>" value="<%= i %>" onchange="onChange(this)" >Option <%= i %></label>
+                    </div>
+                    <% } %>
 
-                <form>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="">Option 1</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="">Option 2</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" >Option 3</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" >Option 4</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" >Option 5</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" >Option 6</label>
-                    </div>
                 </form>
+                <br/>
+                <div id="results"></div>
+
             </div>
             <div class="col-sm-8">
                 <h3>Your search result here...</h3>
                 <p>Results....</p>
+
             </div>
         </div>
     </div>
 
-    <!--THE SCRIPTS-->
+    <!------- THE SCRIPTS ------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/searchResultsPage.js"></script>  <!--Here is the AJAX js for the checkboxes-->
 
   </body>
 </html>

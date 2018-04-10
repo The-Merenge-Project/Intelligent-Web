@@ -1,47 +1,70 @@
+
 $(function () {
+
+    var map, locationMessage;
 
     function initMap() {
 
-        var location = new google.maps.LatLng(53.38297,  -1.4659);
+        // var location = new google.maps.LatLng(53.38297,  -1.4659);
+        //
+        // var mapCanvas = document.getElementById('map');
+        // var mapOptions = {
+        //     center: location,
+        //     zoom: 16,
+        //     panControl: false,
+        //     mapTypeId: google.maps.MapTypeId.ROADMAP
+        // }
+        //
+        // var map = new google.maps.Map(mapCanvas, mapOptions);
 
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-            center: location,
-            zoom: 16,
-            panControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+        //Default
+        locationCoordinates = {lat:53.3811, lng: -1.4701};
 
-        var map = new google.maps.Map(mapCanvas, mapOptions);
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 53.3811, lng: -1.4701},
+            zoom: 15
+        });
+        locationMessage = new google.maps.InfoWindow;
 
         //The image of the marker in out hierarchy
         var markerImage = '/img/marker.png';
 
-        //Add the marker to the map
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            icon: markerImage
-        });
+        //HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log(pos)
 
-        //Content displayed above the marker image
-        var contentString = '<div class="info-window">' +
-            '<h3>Info Window Content</h3>' +
-            '<div class="info-content">' +
-            '<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>' +
-            '</div>' +
-            '</div>';
+                //Add the marker to the map
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    icon: markerImage
+                });
 
-        //Create the info window object
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 400
-        });
+                locationMessage.setPosition(pos);
+                locationMessage.setContent('Location found.');
+                locationMessage.open(map);
+                map.setCenter(pos);
 
-        //Add the info window to the object and wait for a click on the marker to show the window
-        marker.addListener('click', function () {
-            infowindow.open(map, marker);
-        });
+            }, function() {
+                handleLocationError(true, locationMessage, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, locationMessage, map.getCenter());
+        }
+    }
+
+    function handleLocationError(browserHasGeolocation, locationMessage, pos) {
+        locationMessage.setPosition(pos);
+        locationMessage.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        locationMessage.open(map);
     }
 
     google.maps.event.addDomListener(window, 'load', initMap);

@@ -29,7 +29,7 @@ Restaurant.index({ name: 1, address: 1}, { unique: true });
 
 Restaurant.set('toObject', {getters: true, virtuals: true});
 
-
+// COMPILE A MODEL FROM SCHEMA
 var restaurantModel = mongoose.model('Restaurant', Restaurant );
 
 module.exports = restaurantModel;
