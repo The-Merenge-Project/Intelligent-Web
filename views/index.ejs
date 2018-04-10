@@ -24,16 +24,23 @@
      <br/>
 
      <!--The Search Bar definition-->
-     <form action = "search_result" method = "POST">
-         <div id="search_bar">
+
+     <div id="search_bar">
+        <form action = "search_result" method = "POST">
            <div class="input-group col-md-12">
-             <input type="text" id = "search-query" name = "search_query" class="form-control input-lg" placeholder="Search..." required />
+             <input type="text" id = "search_query" name = "search_query" class="form-control input-lg" placeholder="Search..." required />
              <span class="input-group-btn">
                <button class="btn btn-info btn-lg" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
              </span>
            </div>
-         </div>
-     </form>
+        </form>
+
+        <div id="suggestions">
+         <h3>HRERE</h3>
+        </div>
+     </div>
+
+
 
 
 
@@ -48,8 +55,11 @@
 
        <!--THE SCRIPTS-->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="/scripts/index.js"></script>
      <script src="/scripts/bootstrap.min.js"></script>
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&callback=initMap"></script>
      <script src="/scripts/maps.js"></script>
+
+   </div>
   </body>
 </html>

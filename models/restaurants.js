@@ -2,18 +2,18 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+var cuisineEnum = ['African', 'American', 'Asian', 'British', 'Eastern European', 'Greek', 'Italian', 'Mexican',
+    'Mediterranean', 'Middle Eastern', 'Seafood', 'South American', 'Spanish'];
+
 var Restaurant = new Schema(
     {
         name: {type: String, required: true, max: 100},
         address: {type: Schema.ObjectId, ref: 'Address', required: true},
-        cuisine: {type: String, enum: cuisineEnum},
+        cuisine: [{type: String, enum: cuisineEnum}],
         review: [{type: Schema.ObjectId, ref: 'Review'}],
         image: [{data: Buffer}]
     }
 );
-
-var cuisineEnum = ['African', 'American', 'Asian', 'British', 'Eastern European', 'Greek', 'Italian', 'Mexican',
-                    'Mediterranean', 'Middle Eastern', 'Seafood', 'South American', 'Spanish'];
 
 // Virtual for a restaurant's rank
 Restaurant.virtual('rank')
