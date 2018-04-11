@@ -27,25 +27,21 @@
             <div class="col-sm-4">
 
                 <h3>Cuisine</h3>
-                <form id="cuisineOptions" >
-                    <% cuisines.forEach(function (cuisine) { %>
-                        <div class="checkbox" >
-                            <label><input type="checkbox" name="<%= cuisine %>" value="<%= cuisine %>" onchange="onChange(this)" ><%= cuisine %></label>
-                        </div>
-                   <% }) %>
-
-
-
-                </form>
+                <!--<form id="cuisineOptions" >-->
+                    <!--<% //cuisines.forEach(function (cuisine) { %>-->
+                        <!--<div class="checkbox" >-->
+                            <!--<label><input type="checkbox" name="<%= //cuisine %>" value="<%= //cuisine %>" onchange="onChange(this)" ><%= //cuisine %></label>-->
+                        <!--</div>-->
+                    <!--<% //}) %>-->
+                <!--</form>-->
                 <br/>
                 <div id="results"></div>
 
             </div>
             <div class="col-sm-8">
                 <h3>Your search result here...</h3>
-                <h4> You searched for <%= searched_restaurant %></h4>
                 <p>Results....</p>
-                <p><%= restaurant %></p>
+                <p> <%= restaurant[0].name %> <%= restaurant[0].address %></p>
 
             </div>
         </div>

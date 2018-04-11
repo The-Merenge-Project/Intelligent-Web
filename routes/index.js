@@ -23,7 +23,6 @@ router.get('/search_result', function (req, res, next) {
 
 router.post('/search_result', restaurant.getRestaurant);
 
-
 router.post('/checkboxes', function (req,res,next) {
     var userData = req.body; // We have javascript object here in the parser
 
