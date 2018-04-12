@@ -8,7 +8,7 @@ var Address = new Schema(
         county: {type: String, required: true, max: 100},
         city: {type: String, required: true, max: 100},
         postcode: {type: String, required: true, max: 100},
-        building: [{type: Number}],
+        building: {type: Number},
         coordinate: {coordinateX: Number, coordinateY: Number}
     }
 );

@@ -21,18 +21,21 @@ exports.init= function() {
          coordinates: [3.12, 3.12]
     });
 
-    var restaurant = new Restaurant({
-        name: 'Secret by Chev Petrof',
-        address: address,
-        cuisine: 'Eastern European'
-    });
+
     // console.log('dob: '+character.dob);
 
-    // address.save(function (err, results) {
-    //     console.log(results._id);
-    // });
-
-    //restaurant.save(function (err, results) {
+    //address.save(function (err, results) {
     //    console.log(results._id);
-    // });
+    //    var resStaurant = new Restaurant({
+    //        name: 'Secret by Chev Petrof2',
+    //        address: results._id,
+    //        cuisine: 'Eastern European'
+    //    });
+
+    //    restaurant.save(function (err, results) {
+    //        console.log(results._id);
+    //    });
+    //});
+
+
 };
