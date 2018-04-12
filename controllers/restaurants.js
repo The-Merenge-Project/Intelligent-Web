@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurants');
 var Address = require('../models/addresses');
 var async = require('async');
@@ -11,7 +12,6 @@ exports.getRestaurant = function (req, res) {
 
     async.waterfall([
         function (callback) {
-
             Restaurant.find({name: userData.search_query},
                 function (err, restaurants) {
                     if (err)
@@ -20,11 +20,11 @@ exports.getRestaurant = function (req, res) {
                     if (restaurants.length > 0) {
                         var allRestaurants = [];
                         restaurants.forEach(function (restaurantItem) {
-                            //restaurant = {
-                            //    name: restaurantItem.name, address: restaurantItem.address,
-                            //    cuisine: restaurantItem.cuisine
-                            //};
-                            allRestaurants.push(restaurantItem);
+                            restaurant = {
+                                name: restaurantItem.name, address: restaurantItem.address,
+                                cuisine: restaurantItem.cuisine
+                            };
+                            allRestaurants.push(restaurant);
                         })
 
                     }
@@ -32,74 +32,46 @@ exports.getRestaurant = function (req, res) {
                     callback(null, allRestaurants, cuisines)
                 });
         },
-        function (arg1, arg2, callback) {
-            // console.log(arg1)
-            // console.log(arg2)
+        function (restaurants, cuisines, callback) {
 
-            arg1.forEach(function (restaurantItem) {
+            var getRestaurantAddress = function() {
+                // map purchasesArray to an array of promises
+                var promises = restaurants.map(function(restaurant) {
+                    return Address.findOne({
+                        _id: mongoose.Types.ObjectId(restaurant.address) // some property of the desired item
+                    }).exec()
+                        .then(function(addresses) {
+                            // Here you can freely compose an object comprising data from :
+                            // * the synchronously derived `restaurant` (an element of 'restaurants array`)
+                            // * the asynchronously derived `address` (from database given id from restaurant object).
+                            // `restaurant` is still available thanks to "closure".
 
-                Address.find({_id: restaurantItem.address},
-                    'county country postcode',
-                    function (err, addresses) {
-                        if (err)
-                            res.status(500).send('Invalid data!');
+                            var address = {
+                                country: addresses.country,  county: addresses.county,
+                                postcode: addresses.postcode
+                            };
+                            restaurant.address = address;
 
-                        //address = addresses.postcode;
+                            return restaurant;
+                        })
+                        // Here, by catching, no individual error will cause the whole response to fail.
+                        .then(null, (err) = null)
+                });
+                return Promise.all(promises); // return a promise that settles when all `promises` are fulfilled or any one of them fails.
+            };
 
-                        //TODO Make this shit work.
-                        restaurantItem.address = addresses.postcode;
-                        // console.log(restaurantItem.address);
 
-
-
-                    });
+            getRestaurantAddress().then(function(restaurants_with_addresses) {
+                //console.log("Here");
+                // restaurants_with_addresses` is an array of the objects composed in getRestaurantAddress()
+                // , which are restaurants object with added addreses from addres model
+                callback(null, restaurants_with_addresses, cuisines);
+            }).catch(function(err) {
+                console.log(err);
+                res.sendStatus(500); // or similar
             });
-            callback(null, arg1, arg2)
-
         }
     ], function(err, restaurants, cuisines) {
-
-        // console.log(restaurants)
-        // console.log(cuisines)
-
         res.render('search_result', {restaurant: restaurants, cuisines: cuisines});
     });
-
-
-
-    // try {
-    //     Restaurant.find({name: userData.search_query},
-    //         'name address cuisine',
-    //         function (err, restaurants) {
-    //             if (err)
-    //                 res.status(500).send('Invalid data!');
-    //             var restaurant = null;
-    //             if (restaurants.length > 0) {
-    //                 var firstElem = restaurants[0];
-    //                 var address = null;
-    //                 Address.find({_id: firstElem.address},
-    //                     'county country postcode',
-    //                     function (err, addresses) {
-    //                         if (err)
-    //                             res.status(500).send('Invalid data!');
-    //
-    //                         if (addresses.length > 0) {
-    //
-    //                             address = addresses[0].postcode;
-    //                         }
-    //                     });
-    //                 console.log(address);
-    //                 restaurant = {
-    //                     name: firstElem.name, address: address,
-    //                     cuisine: firstElem.cuisine
-    //                 };
-    //             }
-    //             // res.setHeader('Content-Type', 'application/json');
-    //             // res.send(JSON.stringify(restaurant));
-    //             var cuisines = Restaurant.schema.path('cuisine').caster.enumValues;
-    //             res.render('search_result', {restaurant: restaurant, cuisines: cuisines});
-    //         });
-    // } catch (e) {
-    //     res.status(500).send('error ' + e);
-    // }
-}
+};
