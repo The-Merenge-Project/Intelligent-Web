@@ -24,18 +24,18 @@ exports.init= function() {
 
     // console.log('dob: '+character.dob);
 
-    //address.save(function (err, results) {
+    // address.save(function (err, results) {
     //    console.log(results._id);
-    //    var resStaurant = new Restaurant({
+    //    var restaurant = new Restaurant({
     //        name: 'Secret by Chev Petrof2',
     //        address: results._id,
-    //        cuisine: 'Eastern European'
+    //        cuisine: 'Mexican'
     //    });
-
+    //
     //    restaurant.save(function (err, results) {
     //        console.log(results._id);
     //    });
-    //});
+    // });
 
 
 };

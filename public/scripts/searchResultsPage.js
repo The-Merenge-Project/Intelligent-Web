@@ -24,8 +24,8 @@ function sendAjaxQuery(url, data) {
 
 function onChange(checkbox) {
     var checkboxArray= $("form").serializeArray();
+    var restaurants = $("form").serializeArray();
     var data={};
-    $("").prop('checked', true)
 
     //This makes the data in format {name:”Mickey”, surname: “Mouse”, …}
     for (index in checkboxArray){

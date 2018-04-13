@@ -6,7 +6,7 @@ $(function () {
     var userInputedKilometerRadius;
     var restaurantCoordinatesArray = [{lat:43.23, lng: 27.86},{lat:43.24, lng: 27.86},{lat:43.25, lng: 27.85}, {lat:43.21, lng: 27.9}]
 
-    //TODO - we will get restaurant object and will use its field to attach poping window with info for each restaurant
+    //TODO - we will get restaurant object and will use its field to attach popping window with info for each restaurant
     function initMap() {
 
         //Default location (shown if the geolocation does not get the current position of user)
@@ -40,7 +40,7 @@ $(function () {
                     map: map,
                 });
 
-                userInputedKilometerRadius = 5;
+                userInputedKilometerRadius = 3;
 
                 addRestaurantMarkers(restaurantCoordinatesArray, map, userInputedKilometerRadius)
 

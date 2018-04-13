@@ -1,3 +1,5 @@
+function initMap() {}
+
 $("#search_query").keyup(function (e) {
     if ($("#search_query").is(":focus")) {
         console.log("HERE");

@@ -27,13 +27,15 @@
             <div class="col-sm-4">
 
                 <h3>Cuisine</h3>
-                <!--<form id="cuisineOptions" >-->
-                    <!--<% //cuisines.forEach(function (cuisine) { %>-->
-                        <!--<div class="checkbox" >-->
-                            <!--<label><input type="checkbox" name="<%= //cuisine %>" value="<%= //cuisine %>" onchange="onChange(this)" ><%= //cuisine %></label>-->
-                        <!--</div>-->
-                    <!--<% //}) %>-->
-                <!--</form>-->
+
+                <form id="cuisineOptions" >
+                    <% cuisines.forEach(function (cuisine) { %>
+                        <div class="checkbox" >
+                            <label><input type="checkbox" name="<%= cuisine %>" value="<%= cuisine %>" onchange="onChange(this)" ><%= cuisine %></label>
+                        </div>
+                    <% }) %>
+                </form>
+
                 <br/>
                 <div id="results"></div>
 
@@ -41,7 +43,16 @@
             <div class="col-sm-8">
                 <h3>Your search result here...</h3>
                 <p>Results....</p>
-                <p> <%= restaurant[0].name %> <%= restaurant[0].address.country %></p>
+
+                <div id="restaurant_results">
+                    <% if (restaurant) {%>
+                        <% restaurant.forEach(function (item) { %>
+                            <p> <%= item.name %> <%= item.address.country %> <%= item.cuisine%></p>
+                        <% }) %>
+                    <%} else {%>
+                        <p>No restaurants found</p>
+                    <% }%>
+                </div>
 
             </div>
         </div>

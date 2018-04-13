@@ -24,11 +24,16 @@ router.get('/search_result', function (req, res, next) {
 router.post('/search_result', restaurant.getRestaurant);
 
 router.post('/checkboxes', function (req,res,next) {
-    var userData = req.body; // We have javascript object here in the parser
+    // restaurants = restaurant.getRestaurant(req, res);
+    var userData = req.body; // We have the javascript object here in the parser
+
+    console.log(userData)
+    // console.log(restaurants)
 
     res.setHeader('Content-Type', 'application/json');
 
     res.send(JSON.stringify(userData));
+
 })
 
 module.exports = router;
