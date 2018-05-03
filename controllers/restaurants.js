@@ -3,14 +3,11 @@ var Restaurant = require('../models/restaurants');
 var Address = require('../models/addresses');
 var async = require('async');
 
-exports.filterRestaurant = function (req, res) {
+exports.getRestaurant = function (req, res, something) {
+
     var userData = req.body;
+    console.log(something)
 
-
-}
-
-exports.getRestaurant = function (req, res) {
-    var userData = req.body;
     console.log(userData)
     if (userData == null) {
         res.status(403).send('No data sent!')
@@ -18,7 +15,9 @@ exports.getRestaurant = function (req, res) {
 
     async.waterfall([
         function (callback) {
+
             var cuisines = Restaurant.schema.path('cuisine').caster.enumValues;
+
             Restaurant.find({name: userData.search_query},
                 function (err, restaurants) {
                     if (err)
@@ -74,6 +73,7 @@ exports.getRestaurant = function (req, res) {
                     // restaurants_with_addresses` is an array of the objects composed in getRestaurantAddress()
                     // , which are restaurants object with added addreses from addres model
                     callback(null, restaurants_with_addresses, cuisines);
+
                 }).catch(function(err) {
                     console.log(err);
                     res.sendStatus(500); // or similar
@@ -85,7 +85,7 @@ exports.getRestaurant = function (req, res) {
 
         }
     ], function(err, restaurants, cuisines) {
-
         res.render('search_result', {restaurant: restaurants, cuisines: cuisines});
     });
 };
+

@@ -14,6 +14,8 @@
     <!--The Navigation Bar-->
     <% include partials/navbar.ejs%>
 
+    <% include partials/offline_warning.ejs%>
+
     <br/>
 
     <a href="/">
@@ -21,7 +23,6 @@
     </a>
 
     <br/>
-
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -31,23 +32,40 @@
                 <form id="cuisineOptions" >
                     <% cuisines.forEach(function (cuisine) { %>
                         <div class="checkbox" >
-                            <label><input type="checkbox" name="<%= cuisine %>" value="<%= cuisine %>" onchange="onChange(this)" ><%= cuisine %></label>
+                            <label><input type="checkbox" name="<%= cuisine %>" value="<%= cuisine %>" onchange="onChange()"><%= cuisine %></label>
                         </div>
                     <% }) %>
                 </form>
 
                 <br/>
+
+                <!--checkboxes display here-->
                 <div id="results"></div>
+                <div id="all-res" hidden>
+                    <%var counter = 0%>
+                    <% if (restaurant){%>
+                    <% restaurant.forEach(function (item) { %>
+                    <div id="r<%=counter%>">
+                        <%= item.name %> <%= item.address.city %> <%= item.address.country %> <%= item.address.postcode %> <%= item.cuisine%>
+                    </div>
+                    <%counter += 1%>
+                    <% }) %>
+                    <div id="counter"><p><%= counter%></p></div>
+                    <%} else {%>
+                    <p hidden>No restaurants found</p>
+                    <% }%>
+                </div>
+
 
             </div>
             <div class="col-sm-8">
                 <h3>Your search result here...</h3>
                 <p>Results....</p>
 
-                <div id="restaurant_results">
-                    <% if (restaurant) {%>
+                <div id="restaurant_resultss">
+                    <% if (restaurant){%>
                         <% restaurant.forEach(function (item) { %>
-                            <p> <%= item.name %> <%= item.address.country %> <%= item.cuisine%></p>
+                            <p> <%= item.name %> <%= item.address.city %> <%= item.address.country %> <%= item.address.postcode %> <%= item.cuisine%></p>
                         <% }) %>
                     <%} else {%>
                         <p>No restaurants found</p>
@@ -61,6 +79,7 @@
     <!------- THE SCRIPTS ------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/index.js"></script>
     <script type="text/javascript" src="/scripts/searchResultsPage.js"></script>  <!--Here is the AJAX js for the checkboxes-->
 
   </body>

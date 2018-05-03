@@ -4,7 +4,7 @@ function sendAjaxQuery(url, data) {
     $.ajax({
         url: url ,    //url to contact
         data: data,   //data to send
-        dataType: 'json',   //declare JSON interaction
+        dataType: 'JSON', //declare JSON interaction
         type: 'POST',   //declare the action(POST)
         success: function (dataR) {  //a.k.a if code 200 is returned
 
@@ -14,27 +14,54 @@ function sendAjaxQuery(url, data) {
 
             // in order to have the object printed by alert
             // we need to JSON stringify the object
-            document.getElementById('results').innerHTML= JSON.stringify(ret);
+            // document.getElementById('results').innerHTML= JSON.stringify(ret);
+
         },
         error: function (xhr, status, error) {
             alert('Error: ' + error.message);
         }
     });
 }
+function setRestaurants(rests){
+    console.log(rests.stringify())
+}
 
-function onChange(checkbox) {
+function onChange() {
     var checkboxArray= $("form").serializeArray();
-    var restaurants = $("form").serializeArray();
     var data={};
+    var testArr=[];
 
-    //This makes the data in format {name:”Mickey”, surname: “Mouse”, …}
-    for (index in checkboxArray){
-        data[checkboxArray[index].name]= checkboxArray[index].value;
+    var j=parseInt(document.getElementById('counter').innerText);
+
+    for(var i=0;i < j;i++){
+        var temp= "r"+ i;
+        testArr.push(document.getElementById(temp).innerHTML);
     }
 
-    console.log(data)
+    var filterRestaurants = "";
+    var allRestaurants ="";
+    var filtered=false;
+    testArr.forEach(function (res) {
+        for (index in checkboxArray){
+            if(res.toString().includes(checkboxArray[index].value))
+                filterRestaurants+=res.toString()
+                filtered=true;
+        }
+        allRestaurants+=res.toString()
+    });
+    if(!filtered){
+        filterRestaurants=allRestaurants
+    }
 
-    // const data = JSON.stringify($(this).serializeArray());
+    document.getElementById('restaurant_resultss').innerText = filterRestaurants;
+
+
+        // This makes the data in format {name:”Mickey”, surname: “Mouse”, …}
+            for (index in checkboxArray){
+                data[checkboxArray[index].name]= checkboxArray[index].value;
+            }
+
+    // data = JSON.stringify($(this).serializeArray());
     sendAjaxQuery('/checkboxes', data);
     event.preventDefault();
 }

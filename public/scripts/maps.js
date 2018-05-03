@@ -1,10 +1,23 @@
+var selectedRadius = 1;
+
+//Changes the state of the segment controller
+$("ul.segmentController").click(function (event) {
+    $("li", this)
+        .removeClass("selected")
+        .filter(event.target)
+        .addClass("selected");
+        // selectedRadius = this.attr("value");
+        // console.log(tattr("value"));
+        selectedRadius = event.target.id
+
+});
 
 $(function () {
 
     var map, locationMessage;
     var locationCoordinates;
     var userInputedKilometerRadius;
-    var restaurantCoordinatesArray = [{lat:43.23, lng: 27.86},{lat:43.24, lng: 27.86},{lat:43.25, lng: 27.85}, {lat:43.21, lng: 27.9}]
+    var restaurantCoordinatesArray = [{lat:53.38, lng: -1.49},{lat:53.404387, lng: -1.426607},{lat:53.394500, lng: -1.457060}, {lat:53.383000, lng: -1.476410}]
 
     //TODO - we will get restaurant object and will use its field to attach popping window with info for each restaurant
     function initMap() {
@@ -38,9 +51,10 @@ $(function () {
                 var marker = new google.maps.Marker({
                     position: pos,
                     map: map,
+                    icon: markerImage
                 });
 
-                userInputedKilometerRadius = 3;
+                userInputedKilometerRadius = selectedRadius;
 
                 addRestaurantMarkers(restaurantCoordinatesArray, map, userInputedKilometerRadius)
 
