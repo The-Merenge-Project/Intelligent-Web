@@ -17,6 +17,22 @@ $("#search_bar_form").submit(function(e){
     }
 });
 
+$(document).ready(function () {
+    $('#search_query').keyup(function () {
+        $('#result').html('');
+        var searchField = $('#search_query').val();
+        var expression = new RegExp(searchField, "i");
+        $.getJSON('\\scripts\\test.json', function (data) {
+            //We check the data one by one
+            $.each(data, function (key, value) {
+                if (value.name.search(expression) != -1 || value.location.search(expression) != -1) {
+                    $('#result').append('<li class="list-group-item">'+value.name +
+                                        '  |  <span class="text-muted">' + value.location + '</span></li>')
+                }
+            })
+        })
+    });
+});
 
 /**
  * When the client gets off-line, it shows an off line warning to the user
