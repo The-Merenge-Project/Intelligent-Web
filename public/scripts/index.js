@@ -17,20 +17,47 @@ $("#search_bar_form").submit(function(e){
     }
 });
 
+/**
+ * Uses POST request to find restaurants matching
+ * the user query in the database and on success
+ * displays them on the page.
+ *
+ * @param user_query a string that the user has typed in when searching for a restaurant
+ */
+function restaurantSearchAjaxQuery(user_query) {
+    $.ajax({
+        url: '/index',
+        data: user_query,
+        dataType: 'json',
+        type: 'POST',
+        success: function (dataR) {
+            $.each(dataR, function (key, value) {
+                $('#result').append('<li class="list-group-item">'+ JSON.stringify(value.name) +
+                    '  |  <span class="text-muted">' + JSON.stringify(value.address) + '</span></li>');
+            })
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+
+/**
+ * When the user types in the search bar
+ * obtain the string they have typed in
+ * when it has 3 or more characters
+ * and query the database using AJAX POST request.
+ */
 $(document).ready(function () {
     $('#search_query').keyup(function () {
         $('#result').html('');
         var searchField = $('#search_query').val();
-        var expression = new RegExp(searchField, "i");
-        $.getJSON('\\scripts\\test.json', function (data) {
-            //We check the data one by one
-            $.each(data, function (key, value) {
-                if (value.name.search(expression) != -1 || value.location.search(expression) != -1) {
-                    $('#result').append('<li class="list-group-item">'+value.name +
-                                        '  |  <span class="text-muted">' + value.location + '</span></li>')
-                }
-            })
-        })
+        if (searchField.length >= 3){
+            restaurantSearchAjaxQuery({query: searchField});
+        }
     });
 });
 

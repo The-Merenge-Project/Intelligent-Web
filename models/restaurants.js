@@ -7,11 +7,25 @@ var cuisineEnum = ['African', 'American', 'Asian', 'British', 'Eastern European'
 
 var Restaurant = new Schema(
     {
-        name: {type: String, required: true, max: 100},
-        address: {type: Schema.ObjectId, ref: 'Address', required: true},
-        cuisine: [{type: String, enum: cuisineEnum}],
-        review: [{type: Schema.ObjectId, ref: 'Review'}],
-        image: [{data: Buffer}]
+      name: {type: String, required: true, max: 100},
+      address: {
+        country: {type: String, required: true, max: 100},
+        county: {type: String, required: true, max: 100},
+        city: {type: String, required: true, max: 100},
+        postcode: {type: String, required: true, max: 100},
+        building: {type: Number},
+        coordinate: {coordinateX: Number, coordinateY: Number}
+      },
+      cuisine: [{type: String, enum: cuisineEnum}],
+      review: [{
+        author: {type: String, required: true},
+        rating: {type: Number, required: true},
+        date: {type: Date, required: true, default: Date.now()},
+        title: {type: String, max: 100},
+        text: {type: String, required: true, max: 100},
+        image: [{type: Buffer}]
+      }],
+      image: [{data: Buffer}]
     }
 );
 

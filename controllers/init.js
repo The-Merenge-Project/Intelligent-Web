@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-var Address = require('../models/addresses');
 var Restaurant = require('../models/restaurants');
+var User = require('../models/users');
+
 
 
 exports.init= function() {
@@ -12,30 +13,27 @@ exports.init= function() {
     // });
 
     // const dob=new Date(1908, 12, 1).getFullYear();
-    var address = new Address({
-         country: 'England',
-         county: 'South Yorkshire',
-         city: 'Sheffield',
-         postcode: 'S128IK',
-         building: 12,
-         coordinates: [3.12, 3.12]
+
+    var restaurant = new Restaurant({
+        name: 'Chilli Klaus23',
+        address: {
+            country: 'England',
+            county: 'South Yorkshire',
+            city: 'Sheffield',
+            postcode: 'S128IK',
+            building: 12,
+            coordinates: [3.12, 3.1]
+        },
+        cuisine: 'Mexican',
+        review: {
+            author: "chilli_klaus",
+            rating: 5,
+            date: Date.now(),
+            text: "Evala"
+        }
     });
 
-
-    // console.log('dob: '+character.dob);
-
-    // address.save(function (err, results) {
-    //    console.log(results._id);
-    //    var restaurant = new Restaurant({
-    //        name: 'Secret by Chev Petrof2',
-    //        address: results._id,
-    //        cuisine: 'Mexican'
-    //    });
-    //
-    //    restaurant.save(function (err, results) {
-    //        console.log(results._id);
-    //    });
-    // });
-
-
+    restaurant.save(function (err, results) {
+        //console.log(results._id);
+    });
 };

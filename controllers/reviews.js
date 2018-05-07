@@ -1,1 +1,0 @@
-var Review = require('../models/reviews');
