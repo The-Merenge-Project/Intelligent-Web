@@ -24,9 +24,9 @@ var Restaurant = new Schema(
         date: {type: Date, required: true, default: Date.now},
         title: {type: String, max: 100},
         text: {type: String, required: true, max: 100},
-        image: [{type: Buffer}]
+        image: [{type: String}]
       }],
-      image: [{data: Buffer}]
+      image: [{type: String}]
     }
 );
 

@@ -32,7 +32,11 @@ function restaurantSearchAjaxQuery(user_query) {
         type: 'POST',
         success: function (dataR) {
             $.each(dataR, function (key, value) {
-                $('#result').append('<div class="result_item">'+ '<a href="/">' + value.name +'</a>'+
+                console.log("HERE");
+                console.log(value.review[0].image);
+                console.log(value.review[0].image[0]);
+                $('#result').append('<div class="result_item">'+ '<img src="../' + value.review[0].image[0] + '"> '
+                    + '<a href="/">' + value.name +'</a>'+
                     '<p>'+ value.average_rating + ' ' + value.review.length + ' reviews</p>' +
                     '<p class="text-muted">' + value.address.building + ' ' + value.address.street + ', '
                     + value.address.city + ', ' + value.address.county + '</p></div>');

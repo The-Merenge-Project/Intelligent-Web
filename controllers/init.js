@@ -14,27 +14,28 @@ exports.init= function() {
 
     // const dob=new Date(1908, 12, 1).getFullYear();
 
-    // var restaurant = new Restaurant({
-    //     name: 'Chilli Klaus 11.0',
-    //     address: {
-    //         country: 'England',
-    //         county: 'South Yorkshire',
-    //         city: 'Sheffield',
-    //         postcode: 'S128IK',
-    //         building: 12,
-    //         street: 'Club Garden',
-    //         coordinates: [3.12, 3.1]
-    //     },
-    //     cuisine: 'Mexican',
-    //     review: [{
-    //         author: 'chilli_klaus',
-    //         rating: 5,
-    //         date: Date.now(),
-    //         text: 'Evala'
-    //     }]
-    // });
-    //
-    // restaurant.save(function (err, results) {
-    //     //console.log(results._id);
-    // });
+    var restaurant = new Restaurant({
+        name: 'TTTTTT12',
+        address: {
+            country: 'England',
+            county: 'South Yorkshire',
+            city: 'Sheffield',
+            postcode: 'S128IK',
+            building: 12,
+            street: 'Club Garden',
+            coordinates: [3.12, 3.1]
+        },
+        cuisine: 'Mexican',
+        review: [{
+            author: 'chilli_klaus',
+            rating: 5,
+            date: Date.now(),
+            text: 'Evala',
+            image: 'img/uploads/ceviche-con-calamares.jpg'
+        }]
+    });
+
+    restaurant.save(function (err, results) {
+        //console.log(results._id);
+    });
 };
