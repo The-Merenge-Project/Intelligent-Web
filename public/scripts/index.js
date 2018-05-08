@@ -32,8 +32,10 @@ function restaurantSearchAjaxQuery(user_query) {
         type: 'POST',
         success: function (dataR) {
             $.each(dataR, function (key, value) {
-                $('#result').append('<li class="list-group-item">'+ JSON.stringify(value.name) +
-                    '  |  <span class="text-muted">' + JSON.stringify(value.address) + '</span></li>');
+                $('#result').append('<div class="result_item">'+ '<a href="/">' + value.name +'</a>'+
+                    '<p>'+ value.average_rating + ' ' + value.review.length + ' reviews</p>' +
+                    '<p class="text-muted">' + value.address.building + ' ' + value.address.street + ', '
+                    + value.address.city + ', ' + value.address.county + '</p></div>');
             })
         },
         error: function (xhr, status, error) {

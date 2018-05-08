@@ -7,9 +7,10 @@ exports.getRestaurants = function (req, res) {
     console.log(userData.query);
     var cuisines = Restaurant.schema.path('cuisine').caster.enumValues;
     var allRestaurants = [];
+
     try {
         Restaurant.find( {$or: [{name: { $regex: userData.query, $options: 'i' }},
-                                {address: { $regex: userData.query, $options: 'i' }}]} ,
+                                {'address.city': { $regex: userData.query, $options: 'i' }}]} ,
             function (err, restaurants) {
                 if (err) {
                     res.status(500).send('Invalid data!');
@@ -21,7 +22,9 @@ exports.getRestaurants = function (req, res) {
 
                             name: restaurantItem.name,
                             address: restaurantItem.address,
-                            cuisine: restaurantItem.cuisine
+                            cuisine: restaurantItem.cuisine,
+                            review: restaurantItem.review,
+                            average_rating: restaurantItem.average_rating
                         };
                         allRestaurants.push(restaurant);
                     })

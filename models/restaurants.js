@@ -14,13 +14,14 @@ var Restaurant = new Schema(
         city: {type: String, required: true, max: 100},
         postcode: {type: String, required: true, max: 100},
         building: {type: Number},
+        street: {type: String, max: 100},
         coordinate: {coordinateX: Number, coordinateY: Number}
       },
       cuisine: [{type: String, enum: cuisineEnum}],
       review: [{
         author: {type: String, required: true},
         rating: {type: Number, required: true},
-        date: {type: Date, required: true, default: Date.now()},
+        date: {type: Date, required: true, default: Date.now},
         title: {type: String, max: 100},
         text: {type: String, required: true, max: 100},
         image: [{type: Buffer}]
@@ -30,12 +31,18 @@ var Restaurant = new Schema(
 );
 
 // Virtual for a restaurant's rank
-Restaurant.virtual('rank')
+Restaurant.virtual('average_rating')
     .get(function () {
+        var reviews = this.review;
+        var totalScore = 0;
 
-        //const currentDate = new Date().getFullYear();
-        //const result= currentDate - this.dob;
-        //return result;
+        reviews.forEach(function (review) {
+            totalScore += review.rating;
+        })
+
+        var average = totalScore/reviews.length;
+        return average
+
     });
 
 // ensure there cannot be two restaurants named the same at the same address
