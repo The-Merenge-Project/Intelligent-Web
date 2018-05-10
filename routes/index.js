@@ -5,7 +5,7 @@ var router = express.Router();
 var bodyParser = require("body-parser")
 
 var Restaurant = require('../models/restaurants');
-var restaurant = require('../controllers/restaurants');
+var restaurantController = require('../controllers/restaurants');
 
 
 var initDB= require('../controllers/init');
@@ -16,9 +16,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'The Dinebook' });
 });
 
-router.post('/index', restaurant.getRestaurants);
+router.post('/index', restaurantController.restaurantList);
 
-router.post('/search_result', function (req, res, next) {
+router.get('/restaurant/:id', restaurantController.restaurantDetail);
+
+/*router.post('/search_result', function (req, res, next) {
     console.log("Post search_result")
     console.log(req.body)
 
@@ -38,5 +40,5 @@ router.post('/checkboxes', function (req,res,next) {
     res.send(JSON.stringify(userData));
 
 });
-
+*/
 module.exports = router;
