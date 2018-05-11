@@ -1,2 +1,69 @@
-<p> Fabio e pedal</p>
-<p><%= restaurant.name %></p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='/stylesheets/style.css' rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body>
+
+
+    <% include partials/navbar.ejs%>
+
+    <% include partials/offline_warning.ejs%>
+
+    <div class="container">
+        <h3><%= restaurant.name %></h3>
+        <div id="restaurant_details">
+            <p><%= restaurant.restaurant_rating %> stars <%= restaurant.review.length%> reviews</p>
+            <p><%  restaurant.cuisine.forEach(function (cuisine, index, array) { %>
+                    <%if ( index == array.length-1){%>
+                        <%= cuisine %>
+                    <%}else{%>
+                        <%= cuisine %>,
+                    <%}%>
+                <%})%>
+            </p>
+        </div>
+        <p><%= restaurant.address.building%> <%= restaurant.address.street%>,<%= restaurant.address.city%>,<%= restaurant.address.county%></p>
+
+        <hr>
+
+        <div id="gallery">
+            <div id="official_photo">
+                <img src="../<%= restaurant.review[0].image[0]%>">
+            </div>
+            <div id="customer_photos">
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+            <h4>Reviews</h4>
+            <% restaurant.review.forEach(function (review) { %>
+                <div class="review_object">
+                    <p><%= restaurant.review_rating%></p>
+                    <p>Review posted on <%=review.date%></p>
+                    <h6><%= review.title %></h6>
+                    <%= review.text%>
+                </div>
+            <%})%>
+        </div>
+
+    </div>
+    <!--THE SCRIPTS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/scripts/index.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&libraries=geometry&callback=initMap"></script>
+    <script src="/scripts/maps.js"></script>
+
+    </div>
+    </body>
+</html>

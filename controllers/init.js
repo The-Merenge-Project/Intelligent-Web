@@ -15,7 +15,7 @@ exports.init= function() {
     // const dob=new Date(1908, 12, 1).getFullYear();
 
     var restaurant = new Restaurant({
-        name: 'TTTTTT12',
+        name: 'Frijj',
         address: {
             country: 'England',
             county: 'South Yorkshire',
@@ -25,12 +25,17 @@ exports.init= function() {
             street: 'Club Garden',
             coordinates: [3.12, 3.1]
         },
-        cuisine: 'Mexican',
+        cuisine: ['Mexican', 'Eastern European', 'American'],
         review: [{
-            author: 'chilli_klaus',
-            rating: 5,
+            author: "sheih senuri",
+            rating: {
+                service: 5,
+                food: 4,
+                value: 3
+            },
             date: Date.now(),
             text: 'Evala',
+            title: 'Mnogo dobre',
             image: 'img/uploads/ceviche-con-calamares.jpg'
         }]
     });

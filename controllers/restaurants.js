@@ -23,7 +23,7 @@ exports.restaurantList = function (req, res) {
                             address: restaurantItem.address,
                             cuisine: restaurantItem.cuisine,
                             review: restaurantItem.review,
-                            average_rating: restaurantItem.average_rating
+                            restaurant_rating: restaurantItem.restaurant_rating
                         };
                         allRestaurants.push(restaurant);
                     })
@@ -46,9 +46,9 @@ exports.restaurantDetail = function (req, res) {
 
           var restaurant = {name: foundRestaurant.name, address: foundRestaurant.address,
               cuisine: foundRestaurant.cuisine, review: foundRestaurant.review,
-              image: foundRestaurant.image};
+              restaurant_rating: foundRestaurant.restaurant_rating, image: foundRestaurant.image};
 
-          res.render('restaurant_detail', {restaurant : restaurant});
+          res.render('restaurant_detail', {restaurant : restaurant, title: "Restaurant Detail"});
       });
 
 

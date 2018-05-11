@@ -20,9 +20,13 @@ var Restaurant = new Schema(
       cuisine: [{type: String, enum: cuisineEnum}],
       review: [{
         author: {type: String, required: true},
-        rating: {type: Number, required: true},
+        rating: {
+          service: {type: Number, required: true},
+          food: {type: Number, required: true},
+          value: {type: Number, required: true}
+        },
         date: {type: Date, required: true, default: Date.now},
-        title: {type: String, max: 100},
+        title: {type: String, required: true, max: 100},
         text: {type: String, required: true, max: 100},
         image: [{type: String}]
       }],
@@ -30,15 +34,24 @@ var Restaurant = new Schema(
     }
 );
 
+
+Restaurant.path('review').schema.virtual('review_rating')
+    .get(function () {
+        var review = this.review;
+        var score = (review.rating.service + review.rating.food + review.rating.value)/3;
+        return score
+    });
+
 // Virtual for a restaurant's rank
-Restaurant.virtual('average_rating')
+Restaurant.virtual('restaurant_rating')
     .get(function () {
         var reviews = this.review;
         var totalScore = 0;
 
         reviews.forEach(function (review) {
-            totalScore += review.rating;
-        })
+            var reviewScore = (review.rating.service + review.rating.food + review.rating.value)/3;
+            totalScore += reviewScore;
+        });
 
         var average = totalScore/reviews.length;
         return average
