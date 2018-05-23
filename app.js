@@ -7,6 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
+var mongoose = require("mongoose");
+var passport = require("passport");
+var bodyParser = require("body-parser");
+var User= require("./models/users");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose= require("passport-local-mongoose");
+
 var app = express();
 
 // view engine setup
@@ -18,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -37,5 +46,28 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(require("express-session")({
+    secret:"Hello World, this is a session",
+    resave: false,              //Forces the session to be saved back to the session store
+    saveUninitialized: false    //Forces a session that is “uninitialized” to be saved to the store
+}));
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+var User = require('./models/users');
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 
 module.exports = app;
