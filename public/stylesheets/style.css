@@ -80,6 +80,11 @@ button a {
   color: #ffffff;
 }
 
+.navbar-custom .nav-item.active div.nav-link,
+.navbar-custom .nav-item:hover div.nav-link {
+  color: rgba(255,255,255, .7);
+}
+
 /**/
 #search_bar{
   padding: 3px;

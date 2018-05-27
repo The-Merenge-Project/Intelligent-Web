@@ -41,4 +41,13 @@ router.post('/checkboxes', function (req,res,next) {
 
 });
 */
+
+function requireAuthentication(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else{
+    req.flash('error_msg', 'You need to log in.');
+    res.redirect('/users/login');
+  }
+}
 module.exports = router;
