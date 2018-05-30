@@ -15,7 +15,7 @@ exports.init= function() {
     // const dob=new Date(1908, 12, 1).getFullYear();
 
     var restaurant = new Restaurant({
-        name: 'Frijj',
+        name: 'Tequ',
         address: {
             country: 'England',
             county: 'South Yorkshire',
@@ -41,6 +41,25 @@ exports.init= function() {
     });
 
     restaurant.save(function (err, results) {
-        //console.log(results._id);
+        // var test = {
+        //     author: "petrov",
+        //     rating: {
+        //         service: 5,
+        //         food: 4,
+        //         value: 3
+        //     },
+        //     date: Date.now(),
+        //     text: 'UjasT',
+        //     title: 'Mnogo zle'
+        // };
+        //
+        // Restaurant.findById(results._id, function (err, doc) {
+        //     if (err) { console.log(err)}
+        //
+        //     doc.review.push(test);
+        //     doc.save(function (err, results) {
+        //
+        //     });
+        // });
     });
 };
