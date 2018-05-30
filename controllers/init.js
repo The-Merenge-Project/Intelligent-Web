@@ -15,7 +15,7 @@ exports.init= function() {
     // const dob=new Date(1908, 12, 1).getFullYear();
 
     var restaurant = new Restaurant({
-        name: 'Tequ',
+        name: 'KLasata',
         address: {
             country: 'England',
             county: 'South Yorkshire',
@@ -36,7 +36,8 @@ exports.init= function() {
             date: Date.now(),
             text: 'Evala',
             title: 'Mnogo dobre',
-            image: 'img/uploads/ceviche-con-calamares.jpg'
+            image: ['img/uploads/ceviche-con-calamares.jpg', 'img/uploads/burger.jpg',
+                'img/uploads/food.jpg,', 'img/uploads/mc.jpg', 'img/uploads/something.jpg']
         }]
     });
 

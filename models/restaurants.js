@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var cuisineEnum = ['African', 'American', 'Asian', 'British', 'Eastern European', 'Greek', 'Italian', 'Mexican',
+global.cuisineEnum = ['African', 'American', 'Asian', 'British', 'Eastern European', 'Greek', 'Italian', 'Mexican',
     'Mediterranean', 'Middle Eastern', 'Seafood', 'South American', 'Spanish'];
 
 var Restaurant = new Schema(
@@ -17,7 +17,7 @@ var Restaurant = new Schema(
         street: {type: String, max: 100},
         coordinate: {coordinateX: Number, coordinateY: Number}
       },
-      cuisine: [{type: String, enum: cuisineEnum}],
+      cuisine: [{type: String, enum: global.cuisineEnum}],
       review: [{
         author: {type: String, required: true},
         rating: {

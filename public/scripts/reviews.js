@@ -31,7 +31,23 @@ button.addEventListener('click', function(){
 });
 
 //Listen to events
-
 socket.on('review', function (data) {
-    output.innerHTML += '<p>' + data.review + '</p>';
+    // output.innerHTML += '<p>' + data.review + '</p>';
+    var date = new Date();
+
+    output.innerHTML += '<div class=\"review-object\">' +
+        '<div class="review-user">' +
+        '<h5>' + data.username + '</h5>' +
+        '</div>' +
+        '<div class="review-body">' +
+        '<div class="review-header">' +
+        '<p>' + data.service_rating + ' ' + data.food_rating + ' ' + data.value_rating  + '</p>' +
+        '<p>' + ' ' + "Review posted on " + date.toLocaleDateString('en-US') +'</p>' +
+        '</div>' +
+        '<h5>' + data.title + '</h5>' +
+        '<p>' + data.review + '</p>' +
+        '</div>' +
+        '</div>'
 });
+
+

@@ -161,3 +161,65 @@ button a {
   padding-left: 0;
 
 }
+
+#review-section-header h4{
+  display: inline-block;
+  margin-right: 75%;
+}
+
+.review-object{
+  border: 2px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.review-object div{
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.review-user{
+  width: 120px;
+  max-width: 120px;
+}
+
+.review-header p{
+  display: inline-block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/*********** IMAGE GALLERY STYLES ***********/
+#gallery .column img {
+  vertical-align: middle;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+#gallery .column img:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
+#gallery .column {
+  float: left;
+  height: 50%;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#commercial-photo a {
+  position: relative;
+  cursor: pointer;
+}
