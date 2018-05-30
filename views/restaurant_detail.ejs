@@ -7,6 +7,8 @@
         <link href='/stylesheets/style.css' rel="stylesheet" type="text/css" />
         <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/fontawesome-stars.css">
     </head>
 
     <body>
@@ -55,13 +57,90 @@
             <%})%>
         </div>
 
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Write a Review</button>
+
+        <div id="output"> </div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Header</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <p>Title</p>
+                        <% if (user) {%>
+                            <div id="username" hidden=""><%= user.username %></div>
+                        <% } %>
+                        <div id="restaurant-id" hidden><%= restaurant_id %></div>
+                        <input id="title">
+                        <p>Your Review:</p>
+                        <input id="message">
+
+                        <select id="rating-service">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <select id="rating-food">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <select id="rating-value">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="send" type="button" class="btn btn-default" data-dismiss="modal">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <!--THE SCRIPTS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/scripts/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="/scripts/reviews.js"></script>
     <script src="/scripts/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&libraries=geometry&callback=initMap"></script>
     <script src="/scripts/maps.js"></script>
+    <script src="/scripts/jquery.barrating.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#rating-service').barrating({
+                theme: 'fontawesome-stars'
+            });
+        });
+        $(function() {
+            $('#rating-food').barrating({
+                theme: 'fontawesome-stars'
+            });
+        });
+        $(function() {
+            $('#rating-value').barrating({
+                theme: 'fontawesome-stars'
+            });
+        });
+    </script>
 
     </div>
     </body>

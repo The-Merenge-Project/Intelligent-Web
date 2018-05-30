@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('intelligent-web---merenge-merenge-team:server');
 var http = require('http');
 var database = require('../databases/dinebook');
+var mongoose = require('mongoose');
+var Restaurant =  require('../models/restaurants');
 
 /**
  * Get port from environment and store in Express.
@@ -29,6 +31,37 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+// Socket IO
+
+//Setting it up on the server side
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+    console.log('made a socket connection', socket.id);
+
+    //We listen for the review data from the server
+    socket.on('review', function (data) {
+      console.log(data);
+
+        var review = {
+            author: data.username,
+            rating: {
+                service: data.service_rating,
+                food: data.food_rating,
+                value: data.value_rating
+            },
+            date: Date.now(),
+            text: data.review,
+            title: data.title
+        };
+
+        Restaurant.addReviewToRestaurant(review, data.restaurant_id);
+
+      io.sockets.emit('review', data)  //We are emiting the data to all other sockets
+    })
+});
+server.listen(3000);
 
 /**
  * Normalize a port into a number, string, or false.

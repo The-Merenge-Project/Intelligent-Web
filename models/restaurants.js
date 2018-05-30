@@ -64,6 +64,20 @@ Restaurant.index({ name: 1, address: 1}, { unique: true });
 Restaurant.set('toObject', {getters: true, virtuals: true});
 
 // COMPILE A MODEL FROM SCHEMA
-var restaurantModel = mongoose.model('Restaurant', Restaurant );
+var restaurantModel = module.exports = mongoose.model('Restaurant', Restaurant );
 
-module.exports = restaurantModel;
+module.exports.addReviewToRestaurant = function(newReview, restaurant_id){
+    // restaurantModel.update({_id: restaurant_id}, {$push: {reviews: newReview} }, done);
+    console.log(newReview);
+    console.log(restaurant_id);
+
+    restaurantModel.findById(restaurant_id, function (err, doc) {
+        if (err) { console.log(err)}
+
+        doc.review.push(newReview);
+        doc.save(function (err, results) {
+
+        });
+    });
+
+};

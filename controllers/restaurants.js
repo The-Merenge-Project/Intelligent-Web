@@ -48,7 +48,7 @@ exports.restaurantDetail = function (req, res) {
               cuisine: foundRestaurant.cuisine, review: foundRestaurant.review,
               restaurant_rating: foundRestaurant.restaurant_rating, image: foundRestaurant.image};
 
-          res.render('restaurant_detail', {restaurant : restaurant, title: "Restaurant Detail"});
+          res.render('restaurant_detail', {restaurant : restaurant, restaurant_id: req.params.id});
       });
 
 
