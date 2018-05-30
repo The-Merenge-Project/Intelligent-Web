@@ -16,7 +16,7 @@ button.addEventListener('click', function(){
     var serviceRating = document.getElementsByClassName('br-current-rating')[0];
     var foodRating = document.getElementsByClassName('br-current-rating')[1];
     var valueRating = document.getElementsByClassName('br-current-rating')[2];
-    
+
    socket.emit('review', {
        username: username.textContent,
        title: title.value,
