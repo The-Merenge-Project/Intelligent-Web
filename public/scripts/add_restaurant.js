@@ -54,10 +54,12 @@ $('#add_restaurant_form').on('submit', function(ev){
     var formArray= $("form").serializeArray();
     var data={};
     for (index in formArray){
-        console.log(formArray[index].name);
         data[formArray[index].name]= formArray[index].value;
     }
 
+    data['image'] = document.getElementById('photo').src;
+
+    console.log(data);
     sendAjaxQuery('/add_restaurant', data);
     ev.preventDefault();
 });

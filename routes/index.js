@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 //The AJAX module
-var bodyParser = require("body-parser");
+var bodyParser = require("body-parser").json({limit: '100mb'});
 
 var Restaurant = require('../models/restaurants');
 var User = require('../models/users');
@@ -25,7 +25,7 @@ router.get('/add_restaurant', function(req, res) {
    res.render('add_restaurant');
 });
 
-router.post('/add_restaurant', restaurantController.addRestaurant);
+router.post('/add_restaurant', bodyParser, restaurantController.addRestaurant);
 
 router.get("/secret",function(req, res){
     res.render("secret");

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurants');
-var async = require('async');
+var fs = require('fs');
 
 /**
  * Uses data sent via the add restaurant page
@@ -23,6 +23,22 @@ exports.addRestaurant = function(req, res) {
         }
     }
 
+    var newString = new Date().getTime();
+    var targetDirectory = "./public/img/uploads/" + restaurantData.name + "/";
+    var imageBlob = req.body.image.replace(/^data:image\/\w+;base64,/, "");
+    var buf = new Buffer(imageBlob, 'base64');
+
+    var imagePath = targetDirectory + newString + '.png';
+    if(!fs.existsSync(targetDirectory)) {
+        fs.mkdir(targetDirectory, function(err){
+            if(err) throw err;
+            console.log(imagePath)
+            fs.writeFile(imagePath, buf, function(err) {
+                if(err) throw err;
+            });
+        });
+    }
+
     // create the new restaurant object with the obtained values
     var new_restaurant = new Restaurant({
         name: restaurantData.name,
@@ -34,7 +50,8 @@ exports.addRestaurant = function(req, res) {
             street: restaurantData.street,
             coordinate: { lat: restaurantData.latitude, lng: restaurantData.longitude}
         },
-        cuisine: cuisines
+        cuisine: cuisines,
+        image: imagePath
     });
 
     // save the restaurant to the databse

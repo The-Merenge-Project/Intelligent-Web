@@ -67,11 +67,12 @@
             <input class="field form-control" id="longitude" name="longitude"></input>
         </div>
         <div class="form-group">
-            <div class="camera">
+            <input type="file" name="image" id="imageUpload"></input>
+            <div class="photo">
                 <video id="video">Video stream not available.</video>
                 <button id="startbutton">Take photo</button>
             </div>
-            <canvas id="canvas">
+            <canvas id="canvas" hidden>
             </canvas>
             <div class="output">
                 <img id="photo" alt="The screen capture will appear in this box.">
@@ -88,5 +89,6 @@
   <script src="/scripts/bootstrap.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&libraries=places&callback=initAutocomplete" async defer></script>
   <script src="/scripts/add_restaurant.js"></script>
+  <script src="/scripts/capture.js"></script>
   </body>
 </html>
