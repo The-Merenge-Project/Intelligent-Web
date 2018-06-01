@@ -31,13 +31,13 @@
                 <%})%>
             </p>
         </div>
-        <p><%= restaurant.address.building%> <%= restaurant.address.street%>,<%= restaurant.address.city%>,<%= restaurant.address.county%></p>
+        <p><%= restaurant.address.building%> <%= restaurant.address.street%>,<%= restaurant.address.city%></p>
 
         <hr>
 
         <div id="gallery">
             <div class="row">
-                <% var imageArr = restaurant.review[0].image %>
+                <% var imageArr = restaurant.image[0] %>
 
                 <div class="col-sm-4">
                     <div id="commercial-photo">
