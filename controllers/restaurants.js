@@ -24,7 +24,7 @@ exports.addRestaurant = function(req, res) {
     }
 
     var newString = new Date().getTime();
-    var targetDirectory = "./public/img/uploads/" + restaurantData.name + "/";
+    var targetDirectory = "../public/img/uploads/" + restaurantData.name + "/";
     var imageBlob = req.body.image.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(imageBlob, 'base64');
 
