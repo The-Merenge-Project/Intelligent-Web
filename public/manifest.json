@@ -1,0 +1,14 @@
+{
+  "name" : "The Dinebook Restaurant Advisor",
+  "short_name": "The Dinebook",
+  "start_url": "/views/index.ejs",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eee",
+  "theme_color": "#108789",
+  "icons": [
+    {
+
+    }
+  ]
+}
