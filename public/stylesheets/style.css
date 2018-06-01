@@ -212,6 +212,11 @@ button a {
   padding: 5px;
 }
 
+/*********** Add Restautant Checkboxes ***********/
+.cuisines {
+  width: 19%;
+}
+
 /* Clearfix (clear floats) */
 .row::after {
   content: "";

@@ -10,12 +10,12 @@ var Restaurant = new Schema(
       name: {type: String, required: true, max: 100},
       address: {
         country: {type: String, required: true, max: 100},
-        county: {type: String, required: true, max: 100},
+        county: {type: String, max: 100},
         city: {type: String, required: true, max: 100},
         postcode: {type: String, required: true, max: 100},
         building: {type: Number},
         street: {type: String, max: 100},
-        coordinate: {coordinateX: Number, coordinateY: Number}
+        coordinate: {lat: Number, lng: Number}
       },
       cuisine: [{type: String, enum: global.cuisineEnum}],
       review: [{

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='/stylesheets/style.css' rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+
+  <!--The Navigation Bar-->
+  <% include partials/navbar.ejs%>
+
+  <% include partials/offline_warning.ejs%>
+
+  <br/>
+
+  <div class="container">
+    <div id="result"></div>
+    <form id="add_restaurant_form">
+        <div class="form-group">
+            <label>Restaurant Name</label>
+            <input type="text" class="form-control" placeholder="Name" name="name" required>
+        </div>
+        <div class="checkbox form-group" >
+            <label>Select Cuisines: </label>
+            <br>
+            <% global.cuisineEnum.forEach(function (cuisine) { %>
+
+                <label class="cuisines"><input type="checkbox" class="cuisine" name="<%= cuisine %>" value="<%= cuisine %>">  <%= cuisine %></label>
+            <% }) %>
+        </div>
+
+        <div class="form-group" id="locationField">
+            <label>Enter Address or Post Code Here</label>
+            <input id="autocomplete" class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text" required></input>
+        </div>
+        <div class="form-group">
+            <label>Street Number</label>
+            <input class="field form-control" id="street_number" name="bulding" disabled="true" required></input>
+        </div>
+        <div class="form-group">
+            <label>Street Address</label>
+            <input class="field form-control" id="route" name="street" disabled="true" required></input>
+        </div>
+        <div class="form-group">
+            <label>City</label>
+            <input class="field form-control" id="postal_town" name="city" disabled="true" required></input>
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            <input class="field form-control" id="administrative_area_level_1" name="country" disabled="true" required></input>
+        </div>
+        <div class="form-group">
+            <label>Zip Code</label>
+            <input class="field form-control" id="postal_code" name="postcode" disabled="true" required></input>
+        </div>
+        <div class="form-group" hidden>
+            <label>Latitude</label>
+            <input class="field form-control" id="latitude" name="latitude"></input>
+        </div>
+        <div class="form-group" hidden>
+            <label>Longitude</label>
+            <input class="field form-control" id="longitude" name="longitude"></input>
+        </div>
+        <div class="form-group">
+            <input type="file" name="image" id="imageUpload"></input>
+            <div class="photo">
+                <video id="video">Video stream not available.</video>
+                <button id="startbutton">Take photo</button>
+            </div>
+            <canvas id="canvas" hidden>
+            </canvas>
+            <div class="output">
+                <img id="photo" alt="The screen capture will appear in this box.">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+
+  </div>
+
+      <!--THE SCRIPTS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/scripts/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7p6aOoNrI9sWcln0s5v-DC1wSLX_yf5s&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="/scripts/add_restaurant.js"></script>
+  <script src="/scripts/capture.js"></script>
+  </body>
+</html>

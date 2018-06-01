@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 //The AJAX module
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser").json({limit: '100mb'});
 
 var Restaurant = require('../models/restaurants');
-var User = require('../models/users')
+var User = require('../models/users');
 var restaurantController = require('../controllers/restaurants');
 
 
@@ -21,13 +21,19 @@ router.post('/index', restaurantController.restaurantList);
 
 router.get('/restaurant/:id', restaurantController.restaurantDetail);
 
+router.get('/add_restaurant', function(req, res) {
+   res.render('add_restaurant');
+});
+
+router.post('/add_restaurant', bodyParser, restaurantController.addRestaurant);
+
 router.get("/secret",function(req, res){
     res.render("secret");
 });
 
 router.get('/signup', function (req,res,next) {
     res.render('signup');
-})
+});
 
 router.post("/register", function(req, res){
     User.register(new User({

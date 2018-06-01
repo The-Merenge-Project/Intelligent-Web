@@ -93,9 +93,6 @@ function showOfflineWarning(){
         $("#search_bar").addClass('search_query_warning');
         document.getElementById('offline_search_warning').style.display = 'block';
     }
-
-
-
 }
 
 function hideOfflineWarning(){
@@ -104,5 +101,4 @@ function hideOfflineWarning(){
         $("#search_bar").removeClass('search_query_warning');
         document.getElementById('offline_search_warning').style.display = 'none';
     }
-
 }
