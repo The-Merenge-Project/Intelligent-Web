@@ -27,18 +27,19 @@ exports.addRestaurant = function(req, res) {
     var targetDirectory = "../public/img/uploads/" + restaurantData.name + "/";
     var imageBlob = req.body.image.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(imageBlob, 'base64');
+    var saveImagePath = "img/uploads/" + restaurantData.name + "/" + newString + ".png";
 
     var imagePath = targetDirectory + newString + '.png';
     if(!fs.existsSync(targetDirectory)) {
         fs.mkdir(targetDirectory, function(err){
             if(err) throw err;
-            console.log(imagePath)
             fs.writeFile(imagePath, buf, function(err) {
                 if(err) throw err;
             });
         });
     }
 
+    console.log(restaurantData);
     // create the new restaurant object with the obtained values
     var new_restaurant = new Restaurant({
         name: restaurantData.name,
@@ -51,7 +52,7 @@ exports.addRestaurant = function(req, res) {
             coordinate: { lat: restaurantData.latitude, lng: restaurantData.longitude}
         },
         cuisine: cuisines,
-        image: imagePath
+        image: saveImagePath
     });
 
     // save the restaurant to the databse
@@ -92,6 +93,7 @@ exports.restaurantList = function (req, res) {
                             id: restaurantItem.id,
                             name: restaurantItem.name,
                             address: restaurantItem.address,
+                            image: restaurantItem.image,
                             cuisine: restaurantItem.cuisine,
                             review: restaurantItem.review,
                             restaurant_rating: restaurantItem.restaurant_rating

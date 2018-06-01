@@ -32,14 +32,20 @@ function restaurantSearchAjaxQuery(user_query) {
         type: 'POST',
         success: function (dataR) {
             $.each(dataR, function (key, value) {
+
+                var review_info = "";
+                if (value.review.length > 0) {
+                    review_info = '<p>'+ value.restaurant_rating + ' ' + value.review.length + ' reviews</p>'
+                } else {
+                    review_info = '<p>No Reviews Yet</p>'
+                }
                 console.log("HERE");
-                console.log(value.review[0].image);
-                console.log(value.review[0].image[0]);
-                $('#result').append('<div class="result_item">'+ '<img src="../' + value.review[0].image[0] + '"> '
+                console.log(value.image);
+                $('#result').append('<div class="result_item">'+ '<img src="../' + value.image[0] + '"> '
                     + '<a href="/restaurant/'+ value.id + '">' + value.name +'</a>'+
-                    '<p>'+ value.restaurant_rating + ' ' + value.review.length + ' reviews</p>' +
+                    review_info +
                     '<p class="text-muted">' + value.address.building + ' ' + value.address.street + ', '
-                    + value.address.city + ', ' + value.address.county + '</p></div>');
+                    + value.address.city + '</p></div>');
             })
         },
         error: function (xhr, status, error) {
